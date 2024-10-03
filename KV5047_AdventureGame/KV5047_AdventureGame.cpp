@@ -2,6 +2,7 @@
 
 int main()
 {
+	
 	char adventureMap[10][10] = {
 		{'=', '=', '=', '=', '=', '=', '=', '=', '=', '='},
 		{'=', '=', 'g', 'g', 'g', 'g', 'g', '=', '=', '='},
@@ -15,11 +16,14 @@ int main()
 		{'=', '=', '=', 'g', 'T', 'T', '=', '=', '=', '='}
 	};
 
-	for (int i = 0; i < 10; i++)
+
+
+
+	for (int row = 0; row < 10; row++)
 	{
-		for (int j = 0; j < 10; j++)
+		for (int column = 0; column < 10; column++)
 		{
-			std::cout << adventureMap[i][j] << " ";
+			std::cout << adventureMap[row][column] << " ";
 		}
 		std::cout << std::endl;
 	}
