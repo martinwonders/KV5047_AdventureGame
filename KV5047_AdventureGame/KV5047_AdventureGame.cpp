@@ -3,31 +3,73 @@
 int main()
 {
 	//A 10 by 10 2 dimensial array using list initialisation
-	//'=' = water, 'g' = grass, 'H' = walls, 'T' = trees
+	//'=' = water, 'g' = grass, 'H' = walls, 'T' = trees, 'c' = concrete
 	char adventureMap[10][10] = {
 		{'=', '=', '=', '=', '=', '=', '=', '=', '=', '='},
 		{'=', '=', 'g', 'g', 'g', 'g', 'g', '=', '=', '='},
 		{'=', 'g', 'g', 'g', 'g', 'g', 'g', 'g', '=', '='},
 		{'=', 'g', 'g', 'H', 'H', 'H', 'H', 'g', 'g', '='},
-		{'=', 'g', 'g', 'H', 'g', 'g', 'H', 'g', 'T', '='},
-		{'=', 'g', 'g', 'H', 'g', 'g', 'H', 'g', 'g', '='},
+		{'=', 'g', 'g', 'H', 'c', 'c', 'c', 'g', 'T', '='},
+		{'=', 'g', 'g', 'H', 'c', 'c', 'c', 'g', 'g', '='},
 		{'=', '=', 'g', 'H', 'H', 'H', 'H', 'g', '=', '='},
 		{'=', '=', 'g', 'g', 'g', 'g', 'g', 'g', '=', '='},
 		{'=', '=', '=', 'T', 'g', 'g', 'T', '=', '=', '='},
 		{'=', '=', '=', 'g', 'T', 'T', '=', '=', '=', '='}
 	};
 
-	//Loop through the row indices from 0 to 10
-	for (int row = 0; row < 10; row++)
+	int playerXPos = 4;
+	int playerYPos = 4;
+	char direction = 'e';
+
+
+
+	while (direction != 'q')
 	{
-		//Loop through the column indices from 0 to 10 while 
-		//the current row index remains fixed
-		for (int column = 0; column < 10; column++)
+		std::cout << "You are at coordinates (" << playerXPos << ", " << playerYPos << ") on ";
+
+		//determine what terrain the player is on
+		char terrain = adventureMap[playerXPos][playerYPos];
+		switch (terrain)
 		{
-			//use row and column to index into the 2D array
-			std::cout << adventureMap[row][column] << " ";
+		case '=': std::cout << "water" << std::endl;
+			break;
+		case 'g': std::cout << "grass" << std::endl;
+			break;
+		case 'H': std::cout << "a wall" << std::endl;
+			break;
+		case 'c': std::cout << "concrete" << std::endl;
+			break;
+		case 'T': std::cout << "under a tree" << std::endl;
+			break;
 		}
-		std::cout << std::endl;
+
+		//Ask the player for a direction
+		std::cout << "Which direction do you want to move? (n = north, s = south, e = east, w = west, q = quit" 
+			<< std::endl;
+		std::cin >> direction;
+
+		//Update the players position
+		if (direction == 'n' && playerYPos > 0 ) {
+			playerYPos--;  // Move north
+		}
+		else if (direction == 's' && playerYPos < 9) {
+			playerYPos++;  // Move south
+		}
+		else if (direction == 'e' && playerXPos < 9) {
+			playerXPos++;  // Move east
+		}
+		else if (direction == 'w' && playerXPos > 0) {
+			playerXPos--;  // Move west
+		}
+		else if (direction == 'q') {
+			std::cout << "Exiting the game.\n";
+			break;  // Exit the loop
+		}
+		else {
+			std::cout << "Invalid direction or out of bounds.\n";
+		}
 	}
+
+	return 0;
 }
 
