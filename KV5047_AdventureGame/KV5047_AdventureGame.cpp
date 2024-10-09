@@ -21,14 +21,25 @@ int main()
 	int playerYPos = 4;
 	char direction = 'e';
 
-
+	//Loop through the row indices from 0 to 10
+	for (int row = 0; row < 10; row++)
+	{
+		//Loop through the column indices from 0 to 10 while 
+		//the current row index remains fixed
+		for (int column = 0; column < 10; column++)
+		{
+			//use row and column to index into the 2D array
+			std::cout << adventureMap[row][column] << " ";
+		}
+		std::cout << std::endl;
+	}
 
 	while (direction != 'q')
 	{
-		std::cout << "You are at coordinates (" << playerXPos << ", " << playerYPos << ") on ";
+		std::cout << "You are at coordinates (" << playerYPos << ", " << playerXPos << ") on ";
 
 		//determine what terrain the player is on
-		char terrain = adventureMap[playerXPos][playerYPos];
+		char terrain = adventureMap[playerYPos][playerXPos];
 		switch (terrain)
 		{
 		case '=': std::cout << "water" << std::endl;
